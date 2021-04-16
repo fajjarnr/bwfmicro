@@ -5,12 +5,13 @@ import axios from "src/configs/axios";
 
 import Circle from "public/images/circle-accent-1.svg";
 import Header from "src/parts/Header";
+import Hero from "src/parts/Hero";
 
 function Home() {
   return (
     <>
       <Head>
-        <title>Built With Fajar</title>
+        <title>BuildWith Fajar</title>
       </Head>
 
       <main>
@@ -19,6 +20,7 @@ function Home() {
           <div className="sunshine"></div>
           <div className="container mx-auto">
             <Header />
+            <Hero />
           </div>
         </section>
       </main>

@@ -11,7 +11,7 @@ function Random({ data }) {
 
       <h1 className="text-3xl">{data.title}</h1>
       <p>please complete your task</p>
-      <Link href="/random">
+      <Link href="/courses">
         <a className="text-red-700">go back</a>
       </Link>
     </div>

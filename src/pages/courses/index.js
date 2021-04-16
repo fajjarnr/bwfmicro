@@ -15,7 +15,7 @@ function Random({ data }) {
           return (
             <li key={item.id} className="border border-indigo-700 py-3">
               {item.title}
-              <Link href="/random/[id]" as={`/random/${item.id}`}>
+              <Link href="/courses/[id]" as={`/courses/${item.id}`}>
                 <a className="text-red-700"> launch</a>
               </Link>{" "}
             </li>
