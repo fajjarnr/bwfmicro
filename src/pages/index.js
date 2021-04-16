@@ -4,6 +4,7 @@ import Link from "next/link";
 import axios from "src/configs/axios";
 
 import Circle from "public/images/circle-accent-1.svg";
+import Header from "src/parts/Header";
 
 function Home() {
   return (
@@ -13,10 +14,12 @@ function Home() {
       </Head>
 
       <main>
-        <section className="pt-10">
+        <section className="header-clipping pt-10">
           <Circle className="absolute left-0 bottom-0"></Circle>
           <div className="sunshine"></div>
-          <div className="container mx-auto"></div>
+          <div className="container mx-auto">
+            <Header />
+          </div>
         </section>
       </main>
     </>
