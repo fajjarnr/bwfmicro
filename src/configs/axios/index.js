@@ -3,9 +3,9 @@ import axios from "axios";
 import errorHandler from "./errorHandler";
 
 const instance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_HOST,
+  baseURL: `${process.env.NEXT_PUBLIC_API_HOST}`,
 });
 
-axios.interceptors.request.use((response) => response.data, errorHandler);
+instance.interceptors.response.use((response) => response.data, errorHandler);
 
 export default instance;
