@@ -1,7 +1,12 @@
+import { useState } from "react";
+
 export default function Hero() {
+  const [state, seState] = useState(() => "");
+
   const submit = (e) => {
-    e.preventDefault();
-    console.log("click");
+    window.open(
+      `${process.env.NEXT_PUBLIC_MEMBER_URL}/register?email=${state}`
+    );
   };
 
   return (
@@ -20,6 +25,8 @@ export default function Hero() {
             type="text"
             className="bg-white focus:outline-none border-0 px-6 py-3 w-1/2"
             placeholder="your email address"
+            value={state}
+            onChange={(event) => seState(event.target.value)}
           />
           <button className="bg-orange-500 hover:bg-orange-400 transition-all duration-200 focus:outline-none shadow-inner text-white px-6 py-3">
             Daftar Now
