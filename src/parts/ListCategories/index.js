@@ -36,7 +36,7 @@ export default function ListCategories() {
     {
       imageName: <TravelGuidance />,
       name: "Travel Guidance",
-      total: 73,
+      total: 1021,
     },
   ];
 
