@@ -7,12 +7,14 @@ import Hero from "src/parts/Hero";
 import ListCourses from "src/parts/ListCourses";
 import ListCategories from "src/parts/ListCategories";
 import Footer from "src/parts/Footer";
+import courses from "src/constants/api/courses";
 
 function Home({ data }) {
   return (
     <>
       <Head>
         <title>BuildWith Fajar</title>
+        <link rel="icon" href="/images/logo.svg" />
       </Head>
 
       <main>
@@ -43,8 +45,8 @@ function Home({ data }) {
 
 Home.getInitialProps = async () => {
   try {
-    const data = await axios.get(`/courses`);
-    return { data: data.data.data };
+    const data = await courses.all();
+    return { data: data.data };
   } catch (error) {
     return error;
   }
