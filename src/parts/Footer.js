@@ -93,7 +93,7 @@ export default function Footer() {
           <p className="mt-4 text-indigo-500">
             Submit your email for new update
           </p>
-          <form submit={submit}>
+          <form>
             <input
               type="text"
               className="bg-white focus:outline-none border-0 px-6 py-3 mt-6"

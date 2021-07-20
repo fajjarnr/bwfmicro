@@ -1,13 +1,12 @@
 import Head from "next/head";
 import Circle from "public/images/circle-accent-1.svg";
-import axios from "src/configs/axios";
+import courses from "src/constants/api/courses";
 import Clients from "src/parts/Clients";
+import Footer from "src/parts/Footer";
 import Header from "src/parts/Header";
 import Hero from "src/parts/Hero";
-import ListCourses from "src/parts/ListCourses";
 import ListCategories from "src/parts/ListCategories";
-import Footer from "src/parts/Footer";
-import courses from "src/constants/api/courses";
+import ListCourses from "src/parts/ListCourses";
 
 function Home({ data }) {
   return (
