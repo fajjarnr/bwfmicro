@@ -6,7 +6,7 @@ import Footer from "src/parts/Footer";
 import Feature from "src/parts/Details/Feature";
 import CoursePhoto from "src/parts/Details/CoursePhoto";
 
-import formatThousand from "src/helpers/FormatThousand";
+import FormatThousand from "src/helpers/FormatThousand";
 
 import { CSSTransition } from "react-transition-group";
 
@@ -128,7 +128,7 @@ function DetailsCourse({ data }) {
                     {data?.type === "free" ? (
                       "Free"
                     ) : (
-                      <span>Rp {formatThousand(data?.price ?? 0)}</span>
+                      <span>Rp {FormatThousand(data?.price ?? 0)}</span>
                     )}
                   </h5>
                   <a
