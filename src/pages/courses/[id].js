@@ -129,7 +129,7 @@ function DetailsCourse({ data }) {
                     {data?.type === "free" ? (
                       "Free"
                     ) : (
-                      <span>Rp {formatThousand(data?.price ?? 0)}</span>
+                      <span>Rp {FormatThousand(data?.price ?? 0)}</span>
                     )}
                   </h5>
                   <a
