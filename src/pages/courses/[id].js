@@ -41,38 +41,40 @@ function DetailsCourse({ data }) {
     <>
       <Title name={data?.name ?? "Course Detail"} />
       <section
-        className="pt-10 relative overflow-hidden"
+        className="px-4 pt-10 relative overflow-hidden"
         style={{ height: 660 }}
       >
         {data?.chapters?.[0]?.lessons?.[0]?.video && (
-          <div className="video-wrapper">
+          <div className="video-wrapper min-h-screen md:min-h-full">
             <YouTube
               videoId={data?.chapters?.[0]?.lessons?.[0]?.video}
               id={data?.chapters?.[0]?.lessons?.[0]?.video}
               opts={{
                 playerVars: {
                   loop: 1,
-                  autoplay: 1,
                   mute: 1,
+                  autoplay: 1,
                   controls: 0,
                   showinfo: 0,
                 },
               }}
-              onEnd={(event) => event.target.playVideo()}
+              onEnd={(event) => {
+                event.target.playVideo();
+              }}
             ></YouTube>
           </div>
         )}
-        <div className="absolute inset-0 z-0 h-full w-full bg-black opacity-75">
-          <div className="meta-title absolute inset-0 object-fill z-0 w-full flex justify-center items-center">
-            <div className="text-center">
-              <h3 className="text-lg text-white">Kelas Online :</h3>
-              <h4 className="text-6xl text-teal-500 font-semibold">
-                {data?.name ?? "Nama Kelas"}
-              </h4>
-            </div>
+
+        <div className="absolute inset-0 z-0 w-full h-full bg-black opacity-75"></div>
+        <div className="meta-title absolute inset-0 object-fill z-0 w-full flex justify-center items-center">
+          <div className="text-center">
+            <h3 className="text-lg text-white">Kelas Online: </h3>
+            <h4 className="text-3xl md:text-6xl text-teal-500 font-semibold">
+              {data?.name ?? "Nama Kelas"}
+            </h4>
           </div>
         </div>
-        <div className="container mx-auto z-10 relative">
+        <div className="container mx-auto z-20 relative">
           <Header></Header>
         </div>
       </section>
@@ -105,7 +107,6 @@ function DetailsCourse({ data }) {
             </div>
           </div>
         </div>
-
         <div>
           <CSSTransition
             in={isSticky}
@@ -128,11 +129,11 @@ function DetailsCourse({ data }) {
                     {data?.type === "free" ? (
                       "Free"
                     ) : (
-                      <span>Rp {FormatThousand(data?.price ?? 0)}</span>
+                      <span>Rp {formatThousand(data?.price ?? 0)}</span>
                     )}
                   </h5>
                   <a
-                    href={`${process.env.NEXT_PUBLIC_MEMBER_URL}/joined/${data.id}`}
+                    href={`${process.env.NEXT_PUBLIC_MEMBERPAGE_URL}/joined/${data.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-orange-500 hover:bg-orange-400 transition-all duration-200 focus:outline-none shadow-inner text-white px-6 py-3 whitespace-no-wrap"
@@ -216,7 +217,6 @@ function DetailsCourse({ data }) {
           </div>
         </div>
       </section>
-
       <section className="mt-24 bg-indigo-1000 py-12" ref={footer}>
         <Footer></Footer>
       </section>

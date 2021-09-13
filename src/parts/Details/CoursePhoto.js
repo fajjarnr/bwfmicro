@@ -1,4 +1,7 @@
+import React from "react";
+
 import Preview from "public/images/icon-preview.svg";
+
 import Modal from "src/components/Modal";
 
 export default function CoursePhoto({ data }) {

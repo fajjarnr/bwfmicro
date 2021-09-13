@@ -1,16 +1,24 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Logo from "public/images/logo.svg";
+import React, { useEffect, useState } from "react";
 import propTypes from "prop-types";
-import { useEffect, useState } from "react";
+
+import { useRouter } from "next/router";
+
+import Link from "next/link";
+
+import Logo from "public/images/logo.svg";
 import DefaultAvatar from "public/images/default-avatar.svg";
 
-function Header({ onLight }) {
-  const [user, setUser] = useState(() => null);
+export default function Header({ onLight }) {
+  const [User, setUser] = useState(() => null);
+
+  const [ToggleMenu, setToggleMenu] = useState(false);
 
   useEffect(() => {
     const userCookies =
-      decodeURIComponent(window.document.cookie)?.split("=")[1] ?? null;
+      decodeURIComponent(window.document.cookie)
+        ?.split(";")
+        ?.find?.((item) => item.indexOf("BWAMICRO:user") > -1)
+        ?.split("=")[1] ?? null;
     setUser(userCookies ? JSON.parse(userCookies) : null);
   }, []);
 
@@ -22,16 +30,31 @@ function Header({ onLight }) {
     router.pathname.indexOf("/login") > -1
       ? `${process.env.NEXT_PUBLIC_MEMBER_URL}/register`
       : `${process.env.NEXT_PUBLIC_MEMBER_URL}/login`;
-
   const textCTA = router.pathname.indexOf("/login") > -1 ? "Daftar" : "Masuk";
 
   return (
-    <header className="flex justify-between items-center">
-      <div className={{ height: 54 }}>
+    <header
+      className={[
+        "flex justify-between items-center",
+        ToggleMenu ? "fixed w-full -mx-4 px-4" : "",
+      ].join(" ")}
+    >
+      <div style={{ height: 54, zIndex: 50 }}>
         <Logo className="on-dark"></Logo>
       </div>
-      <ul className="flex items-center">
-        <li>
+      <div className="flex md:hidden">
+        <button
+          onClick={() => setToggleMenu((prev) => !prev)}
+          className={["toggle z-50", ToggleMenu ? "active" : ""].join(" ")}
+        ></button>
+      </div>
+      <ul
+        className={[
+          "transition-all duration-200 items-center fixed inset-0 bg-indigo-1000 pt-24 md:pt-0 md:bg-transparent md:relative md:flex md:opacity-100 md:visible",
+          ToggleMenu ? "opacity-100 visible z-20" : "opacity-0 invisible",
+        ].join(" ")}
+      >
+        <li className="my-4 md:my-0">
           <Link href="/">
             <a
               className={[
@@ -43,7 +66,7 @@ function Header({ onLight }) {
             </a>
           </Link>
         </li>
-        <li>
+        <li className="my-4 md:my-0">
           <Link href="/">
             <a
               className={[
@@ -55,7 +78,7 @@ function Header({ onLight }) {
             </a>
           </Link>
         </li>
-        <li>
+        <li className="my-4 md:my-0">
           <Link href="/">
             <a
               className={[
@@ -67,7 +90,7 @@ function Header({ onLight }) {
             </a>
           </Link>
         </li>
-        <li>
+        <li className="my-4 md:my-0">
           <Link href="/">
             <a
               className={[
@@ -79,33 +102,33 @@ function Header({ onLight }) {
             </a>
           </Link>
         </li>
-        <li>
-          {user ? (
+        <li className="mt-8 md:mt-0">
+          {User ? (
             <a
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noereferrer"
               href={linkCTA}
-              className="hover:bg-indigo-800 transition-all duration-200 text-white hover:text-teal-500 text-lg px-6 py-3 ml-6 inline-flex items-center"
+              className="hover:bg-indigo-800 transition-all duration-200 text-white hover:text-teal-500 text-lg px-6 py-3 font-medium ml-6 inline-flex items-center"
             >
-              <span className="rounded-full overflow-hidden mr-3 border-2 border-orange-500 w-8 h-8">
-                {user?.thumbnail ? (
+              <span className="rounded-full overflow-hidden mr-3 border-2 border-orange-500">
+                {User?.thumbnail ? (
                   <img
-                    src={user?.thumbnail}
-                    alt={user?.thumbnail ?? "avatar"}
+                    src={User?.thumbnail}
+                    alt={User?.name ?? "Username"}
                     className="object-cover w-8 h-8 inline-block"
                   />
                 ) : (
-                  <DefaultAvatar className="w-8 h-8 inline-block fill-indigo-500" />
+                  <DefaultAvatar className="fill-indigo-500 w-8 h-8 inline-block"></DefaultAvatar>
                 )}
               </span>
-              Hi, {user.name}
+              Hi, {User.name}
             </a>
           ) : (
             <a
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noereferrer"
               href={linkCTA}
-              className="bg-indigo-700 hover:bg-indigo-800 transition-all duration-200 text-white hover:text-teal-500 text-lg px-6 py-3 ml-6"
+              className="bg-indigo-700 hover:bg-indigo-800 transition-all duration-200 text-white hover:text-teal-500 text-lg px-6 py-3 font-medium ml-6"
             >
               {textCTA}
             </a>
@@ -115,8 +138,6 @@ function Header({ onLight }) {
     </header>
   );
 }
-
-export default Header;
 
 Header.propTypes = {
   onLight: propTypes.bool,
