@@ -1,6 +1,6 @@
 import React from "react";
 
-import formatThousand from "src/helpers/formatThousand";
+import FormatThousand from "src/helpers/FormatThousand";
 
 export default function Feature({ data }) {
   return (
@@ -14,7 +14,7 @@ export default function Feature({ data }) {
           <span className="text-gray-600 block">{data.meta}</span>
           <span className="text-gray-900 text-3xl">
             {typeof data.value === "number"
-              ? formatThousand(data.value)
+              ? FormatThousand(data.value)
               : data?.value}
           </span>
         </div>
