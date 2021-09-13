@@ -132,7 +132,7 @@ function DetailsCourse({ data }) {
                     )}
                   </h5>
                   <a
-                    href={`${process.env.NEXT_PUBLIC_MEMBERPAGE_URL}/joined/${data.id}`}
+                    href={`${process.env.NEXT_PUBLIC_MEMBER_URL}/joined/${data.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-orange-500 hover:bg-orange-400 transition-all duration-200 focus:outline-none shadow-inner text-white px-6 py-3 whitespace-no-wrap"
