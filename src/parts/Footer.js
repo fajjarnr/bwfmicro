@@ -102,7 +102,7 @@ export default function Footer() {
       </div>
       <div className="border-t pt-8 mt-8 border-gray-800 text-center">
         <p className="text-indigo-500">
-          2021 Copyright Micro by BuildWith Fajar. All Rights Reserved
+          2021 Copyright Micro by BuildWith Fun. All Rights Reserved
         </p>
       </div>
     </footer>

@@ -12,7 +12,7 @@ function Home({ data }) {
   return (
     <>
       <Head>
-        <title>BuildWith Fajar</title>
+        <title>BuildWithFun</title>
         <link rel="icon" href="/images/logo.svg" />
       </Head>
 
