@@ -15,7 +15,3 @@ module.exports = withPlugins([
     },
   }),
 ]);
-
-module.exports = {
-  output: 'standalone',
-};
