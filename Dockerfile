@@ -11,7 +11,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 #     elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
 #     else echo "Lockfile not found." && exit 1; \
 #     fi
-RUN npm ci
+RUN npm install
 
 # Rebuild the source code only when needed
 FROM registry.access.redhat.com/ubi8/nodejs-16 AS builder
