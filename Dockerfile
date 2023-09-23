@@ -1,29 +1,31 @@
-# Gunakan image Node.js versi 14 (atau sesuaikan dengan versi yang Anda butuhkan)
-FROM node:18-alpine
+# Gunakan image Ubuntu sebagai dasar
+FROM ubuntu
 
-# Tambahkan user non-root
-RUN adduser --disabled-password --gecos "" jay
+# Install dependensi yang dibutuhkan
+RUN apt-get update && apt-get install -y \
+    curl \
+    nodejs \
+    npm
 
 # Buat direktori untuk aplikasi Anda
 WORKDIR /app
 
-# Salin file package.json dan package-lock.json (jika ada) ke dalam container
-COPY package*.json ./
+# Salin file package.json dan yarn.lock ke direktori kerja
+COPY package.json yarn.lock ./
 
-# Install dependensi yang diperlukan
+# Install dependensi dengan npm
 RUN npm install
 
-# Salin seluruh konten proyek Anda ke dalam container
+# Salin seluruh konten aplikasi Next.js Anda ke dalam kontainer
 COPY . .
 
 # Build aplikasi Next.js
 RUN npm run build
 
-# Ekspor port yang akan digunakan oleh aplikasi Anda
+# Ekspor port yang akan digunakan oleh aplikasi Anda (ganti sesuai dengan port aplikasi Anda)
 EXPOSE 3000
 
-# Beralih ke user non-root
-USER jay
+USER 1001
 
 # Jalankan aplikasi Next.js
 CMD ["npm", "start"]
