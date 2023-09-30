@@ -5,13 +5,26 @@ const withImages = require('next-images');
 
 const path = require('path');
 
-module.exports = withPlugins([
-  withCss({}),
-  withImages({}),
-  withReactSvg({
-    include: path.resolve(__dirname, './public/images'),
+module.exports = withPlugins(
+  [
+    [withCss, {}],
+    [withImages, {}],
+    [
+      withReactSvg,
+      {
+        include: path.resolve(__dirname, './public/images'),
+        webpack(config, options) {
+          return config;
+        },
+      },
+    ],
+  ],
+  {
     webpack(config, options) {
+      // Custom webpack configurations if needed
       return config;
     },
-  }),
-]);
+    // Other Next.js configurations
+    output: 'standalone',
+  }
+);
