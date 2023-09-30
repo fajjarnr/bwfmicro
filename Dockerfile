@@ -1,5 +1,5 @@
 # Install dependencies only when needed
-FROM registry.access.redhat.com/ubi8/nodejs-16 AS deps
+FROM node:16.20.2-bookworm AS deps
 USER 0
 WORKDIR /app
 
@@ -8,12 +8,12 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
     if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
     elif [ -f package-lock.json ]; then npm ci; \
-    elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
+    elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
     else echo "Lockfile not found." && exit 1; \
     fi
 
 # Rebuild the source code only when needed
-FROM registry.access.redhat.com/ubi8/nodejs-16 AS builder
+FROM node:16.20.2-bookworm AS builder
 USER 0
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -31,7 +31,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN npm run build
 
 # Production image, copy all the files and run next
-FROM registry.access.redhat.com/ubi8/nodejs-16-minimal AS runner
+FROM node:16.20.2-bookworm-slim AS runner
 USER 0
 WORKDIR /app
 
