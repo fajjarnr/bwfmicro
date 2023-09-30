@@ -1,5 +1,4 @@
-# Install dependencies only when needed
-FROM node:16.20.2-bookworm-slim AS base
+FROM node:12-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
