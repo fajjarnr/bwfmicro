@@ -1,5 +1,9 @@
 # Install dependencies only when needed
-FROM node:16.20.2-bookworm AS deps
+FROM node:16.20.2-bookworm-slim AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+
 USER 0
 WORKDIR /app
 
@@ -13,7 +17,7 @@ RUN \
     fi
 
 # Rebuild the source code only when needed
-FROM node:16.20.2-bookworm AS builder
+FROM base AS builder
 USER 0
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -31,7 +35,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN npm run build
 
 # Production image, copy all the files and run next
-FROM node:16.20.2-bookworm-slim AS runner
+FROM base AS runner
 USER 0
 WORKDIR /app
 
