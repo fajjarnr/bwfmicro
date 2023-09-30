@@ -30,7 +30,3 @@ yarn-error.log
 .env.local
 .env.*.local
 
-# Ignore any files related to package managers
-yarn.lock
-package-lock.json
-.pnpm-lock.yaml
