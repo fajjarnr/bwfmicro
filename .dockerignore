@@ -1,7 +1,36 @@
-Dockerfile
-.dockerignore
+# Ignore node_modules directory
 node_modules
+
+# Ignore npm's debug log
 npm-debug.log
-README.md
-.next
+
+# Ignore yarn's log files
+yarn-debug.log
+yarn-error.log
+
+# Ignore .git directory
 .git
+
+# Ignore .vscode directory
+.vscode
+
+# Ignore .idea directory (for IntelliJ IDEA)
+.idea
+
+# Ignore .DS_Store files (Mac-specific)
+.DS_Store
+
+# Ignore any build output directories or files
+/build
+/dist
+/out
+
+# Ignore any environment-specific configuration files
+.env
+.env.local
+.env.*.local
+
+# Ignore any files related to package managers
+yarn.lock
+package-lock.json
+.pnpm-lock.yaml
